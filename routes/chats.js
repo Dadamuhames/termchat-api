@@ -5,7 +5,7 @@ const Chat = require("../models/Chat.js");
 const sequelize = require("../models/database.js");
 const { QueryTypes } = require('sequelize');
 const { getChat, getChatByUsers } = require("../models/utils.js");
-
+const User = require('../models/User.js');
 
 
 const router = express.Router();
@@ -47,10 +47,16 @@ router.get("/:id", async (req, res) => {
 
     chatData["companionId"] = companionId
 
+    const companion = await User.findByPk(companionId);
+
+    chatData["companionName"] = `@${companion.username}`;
+
 
     const publicKeys = JSON.parse(chatData?.publicKeys);
 
-    chatData["companionPublicKey"] = publicKeys[companionId.toString()]
+    chatData["publicKey"] = publicKeys[companionId.toString()]
+
+    delete chatData["publicKeys"];
 
     return res.json(chatData);
 })

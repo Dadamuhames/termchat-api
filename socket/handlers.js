@@ -86,6 +86,9 @@ const onDataWrapped = (sock) => {
             return;
         }
 
+
+        if(messageData?.type != "MESSAGE") return;
+
          
         if(!chat.active) {
             await Chat.update({active: true}, {where: {id: chatId}})
