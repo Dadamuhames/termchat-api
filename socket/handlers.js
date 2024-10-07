@@ -19,15 +19,12 @@ const onDataWrapped = (sock) => {
             return;
         }
 
-        console.log(messageData);
-
         // authenticate user
         let deviceToken = messageData?.deviceToken;
         
         const user = await User.findOne({where: {device_token: deviceToken}});
 
         if(user===null) {  //|| user.ip_address != sock.remoteAddress) {
-            console.log("Uset not found")
             sock.destroy();
             return;
         }
@@ -111,9 +108,6 @@ const onDataWrapped = (sock) => {
             messageDataToSend["chat"] = {id: chat.id, name: `@${reciever.username}`}
             messageDataToSend["type"] = "MESSAGE"
             messageDataToSend["message"] = message_text
-
-
-            console.log(messageDataToSend);
 
             recieverSocket.write(JSON.stringify(messageDataToSend));
         }
