@@ -108,7 +108,7 @@ const onDataWrapped = (sock) => {
 
             const message_text = jsonMessage[recieverId.toString()]
 
-            messageDataToSend["chat"] = {id: chat.id, name: `@${reciever.username}`}
+            messageDataToSend["chat"] = {id: chat.id, name: `${user.username}`}
             messageDataToSend["type"] = "MESSAGE"
             messageDataToSend["message"] = message_text
 
