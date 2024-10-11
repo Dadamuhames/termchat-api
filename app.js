@@ -62,7 +62,7 @@ app.use(function(err, req, res, next) {
 
 // tcp server
 const net = require('net');
-const port = process.env.PORT;
+const port = process.env.TCP_PORT;
 const host = '127.0.0.1';
 
 
